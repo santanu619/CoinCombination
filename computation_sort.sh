@@ -28,3 +28,49 @@ echo ${test_var[key1]}
 echo ${test_var[key2]}
 echo ${test_var[key3]}
 echo ${test_var[$another_key_var]}
+counter=0
+Array[((counter++))]=$result1
+Array[((counter++))]=$result2
+Array[((counter++))]=$result3
+Array[((counter++))]=$result4
+echo ${Array[@]}
+echo "Original Numbers in array:"
+for (( i = 0; i <= 3; i++ ))
+    do
+      echo ${Array[$i]}
+    done
+
+for (( i = 0; i <= 3; i++ ))
+do
+   for (( j = $i; j <= 3; j++ ))
+   do
+      if [ ${Array[$i]} -gt ${Array[$j]}  ]; then
+       t=${Array[$i]}
+       Array[$i]=${Array[$j]}
+       Array[$j]=$t
+      fi
+   done
+done
+
+echo -e "\nSorted Numbers in Descending Order:"
+for (( i=0; i <= 3; i++ )) 
+do
+  echo ${Array[$i]}
+done
+for (( i = 0; i <= 3; i++ ))
+do
+   for (( j = $i; j <= 3; j++ ))
+   do
+      if [ ${Array[$i]} -lt ${Array[$j]}  ]; then
+       t=${Array[$i]}
+       Array[$i]=${Array[$j]}
+       Array[$j]=$t
+      fi
+   done
+done
+
+echo -e "\nSorted Numbers in Descending Order:"
+for (( i=0; i <= 3; i++ ))
+do
+  echo ${Array[$i]}
+done
